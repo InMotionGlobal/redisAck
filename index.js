@@ -23,7 +23,6 @@ module.exports = function(options) {
     function publish(channel, message) {
         message.module_ack_id = ackChannel + module_ack_id;
         pub.publish(channel, JSON.stringify(message));
-        console.log('Publishing: %s', message.module_ack_id);
         const response = new Promise(function(resolve, reject) {
             moduleCallbacks[module_ack_id] = function(message) {
                 resolve(message);
