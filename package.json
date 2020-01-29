@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Redis Pub/Sub with built-in acknowledgement channels",
   "dependencies": {
-    "redis": "^0.12.1",
+    "redis": "^2.8.0",
     "uuid": "^2.0.1"
   }
 }
