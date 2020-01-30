@@ -1,6 +1,6 @@
 {
   "name": "redisAck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Redis Pub/Sub with built-in acknowledgement channels",
   "dependencies": {
     "redis": "^2.8.0",
