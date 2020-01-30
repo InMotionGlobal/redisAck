@@ -7,7 +7,7 @@ module.exports = function(options) {
     const moduleId = uuid.v4().replace(/\-/g,'');
     const ackChannel = 'moduleAck:'+moduleId+':';
     var module_ack_id = 0;
-    var moduleCallbacks = [];
+    var moduleCallbacks = {};
 
     sub.on("pmessage", function (pattern, channel, message) {
         try { message = JSON.parse(message); } catch (e) {}
@@ -15,6 +15,7 @@ module.exports = function(options) {
             var returnAckId = +channel.split(':').pop();
             if (moduleCallbacks[returnAckId]) {
                     moduleCallbacks[returnAckId](message);
+                    delete moduleCallbacks[returnAckId];
             }
         }
     });
@@ -23,11 +24,10 @@ module.exports = function(options) {
     function publish(channel, message) {
         message.module_ack_id = ackChannel + module_ack_id;
         pub.publish(channel, JSON.stringify(message));
+        console.log('Publishing: %s', message.module_ack_id);
         const response = new Promise(function(resolve, reject) {
             moduleCallbacks[module_ack_id] = function(message) {
                 resolve(message);
-                delete moduleCallbacks[module_ack_id];
-                console.log(moduleCallbacks);
                 return;
             }
         });
