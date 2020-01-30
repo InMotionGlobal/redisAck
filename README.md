@@ -4,6 +4,11 @@
 
 ## How to use
 
+### To Install
+```
+npm install Inmotionglobal/redisAck
+```
+
 ### Data producer
 ```js
 const client = require('redisAck')({'host': 'ascend.prod'});
