@@ -42,6 +42,10 @@ module.exports = function(options) {
     function subscribe(channel) {
        return sub.subscribe(channel);
     }
+    
+    function psubscribe(channel) {
+       return sub.psubscribe(channel);
+    }
 
     function on(message, callback) {
        return sub.on(message, callback);
@@ -52,6 +56,7 @@ module.exports = function(options) {
         publish,
         ack,
         subscribe,
+        psubscribe,
         on
     }
 }
